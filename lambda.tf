@@ -26,8 +26,8 @@ resource "aws_iam_role_policy_attachment" "lambda_basic_execution_policy" {
 
 data "archive_file" "lambda" {
   type        = "zip"
-  source_file = "lambda.py"
-  output_path = "lambda.zip"
+  source_file = "lambda_function.py"
+  output_path = "lambda_function.zip"
 }
 
 # Lambda function
@@ -35,8 +35,11 @@ resource "aws_lambda_function" "terraform_lambda_func" {
   filename    = data.archive_file.lambda.output_path
   function_name = "terra_lambda_func"
   role        = aws_iam_role.lambda_role.arn
-  handler     = "index.lambda_handler"
+  handler     = "lambda_function.handler"
   runtime     = "python3.8"
+  timeout     = 60
+  memory_size = 128
+  
 }
 
 # S3 bucket notification to trigger Lambda function on object creation/addition

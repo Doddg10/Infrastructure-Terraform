@@ -3,8 +3,6 @@ resource "aws_instance" "bastion" {
   ami             = "ami-04b70fa74e45c3917" 
   instance_type  = var.machine_type
   subnet_id  = module.network.subnets-AZ1["public_subnet1"].id
-#   instance_type   = "t2.micro" 
-#   subnet_id       = aws_subnet.public_subnet.id
   associate_public_ip_address = true
   vpc_security_group_ids  =  [aws_security_group.ssh_from_anywhere.id]
   key_name  = aws_key_pair.tf-key-pair.id
