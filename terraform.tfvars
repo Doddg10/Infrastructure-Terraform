@@ -32,5 +32,7 @@ subnets_details-AZ2=[
     type="private"
 }
 
-
 ]
+
+db_username="admin"
+db_password="admin12345678"
