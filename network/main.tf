@@ -85,4 +85,10 @@ subnet_id     = aws_subnet.subnets-AZ1["public_subnet1"].id
   depends_on = [aws_internet_gateway.my_igw]
 }
 
-
+##########################################################
+# Update the route in the route table to route internet-bound traffic through the NAT gateway
+resource "aws_route" "nat_gateway_route" {
+  route_table_id         = aws_route_table.route_tables[1].id
+  destination_cidr_block = "0.0.0.0/0"
+  nat_gateway_id         = aws_nat_gateway.lab1-nat.id
+}
