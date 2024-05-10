@@ -14,4 +14,6 @@ resource "aws_elasticache_cluster" "elasticache_cluster" {
   engine_version       = "7.1"
   port                 = 6379
   subnet_group_name    = aws_elasticache_subnet_group.elasticache_subnet_gp.name
+  security_group_ids    = [aws_security_group.redis_sg.id]
+
 }

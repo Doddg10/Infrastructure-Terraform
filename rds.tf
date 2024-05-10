@@ -1,20 +1,3 @@
-resource "aws_security_group" "rds_security_group" {
-  name        = "rds_access"
-  description = "Security group for RDS access"
-  vpc_id      = module.network.vpc_id  
-
-  ingress {
-    from_port   = 3306
-    to_port     = 3306
-    protocol    = "tcp"
-    cidr_blocks = ["0.0.0.0/0"]  # Allow connections from anywhere, consider restricting to specific IP ranges
-  }
-
-  tags = {
-    Name = "rds_security_group"
-  }
-}
-
 # RDS DB Subnet Group
 resource "aws_db_subnet_group" "db_subnet_gp" {
   name       = "db-subnet-gp"
